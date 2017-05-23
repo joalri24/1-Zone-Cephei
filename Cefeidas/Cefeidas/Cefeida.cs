@@ -16,11 +16,20 @@ namespace Cefeidas
         // --------------------------------------------------
         // Constantes
         // --------------------------------------------------
+        /// <summary>
+        /// Intervalo en segundos
+        /// </summary>
+        private const double DELTA_TIEMPO = 10000;
 
 
         // --------------------------------------------------
         // Atributos y propiedades
+
         // --------------------------------------------------
+        /// <summary>
+        /// Constante de gravitación universal
+        /// </summary>
+        private double G;
 
         /// <summary>
         /// Tiempo en segundos.
@@ -47,6 +56,11 @@ namespace Cefeidas
         /// </summary>
         private double MasaCascaron { get; set; }
 
+        /// <summary>
+        /// Presión en Pa.
+        /// </summary>
+        private double Presion { get; set; }
+
 
         // --------------------------------------------------
         // Constructores
@@ -55,6 +69,8 @@ namespace Cefeidas
         public Cefeida()
         {
             InitializeComponent();
+
+            G = 6.674 * Math.Pow(10, -11);
 
             MasaInicialInput.Coeficiente = 1M;
             MasaInicialInput.Exponente = 31M;
@@ -81,13 +97,24 @@ namespace Cefeidas
 
         private void ponerValoresIniciales()
         {
-            // TODO
+            MasaEstrella = MasaInicialInput.darValor();
+            MasaCascaron = MasaCascaronInput.darValor();
+            Presion = PresionInicialInput.darValor();
+            Radio = RadioInicialInput.darValor();
+            Tiempo = 0;
         }
 
-        private double calcularVelocidad(double velocidadInicial, double radioInicial, double presionInicial, double masaCascaron, double masaEstrella, double deltaTiempo)
+        private double calcularVelocidad(double velocidadInicial, double radioInicial, double presionInicial, 
+            double masaCascaron, double masaEstrella, double deltaTiempo)
         {
 
-            return 0.0;
+            double respuesta = Velocidad;
+            double rCuadrado = Math.Pow(radioInicial, 2);
+
+            respuesta += (((4 * Math.PI * presionInicial * rCuadrado) / masaCascaron) 
+                - ((G * masaEstrella) / rCuadrado)) * deltaTiempo;
+              
+            return respuesta;
         }
     }
 }
