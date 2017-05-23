@@ -29,13 +29,10 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,12 +45,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.chartRadio = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartPresion = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartVelocidad = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.PresionInicialInput = new Cefeidas.scientificNotationInput();
             this.RadioInicialInput = new Cefeidas.scientificNotationInput();
             this.MasaCascaronInput = new Cefeidas.scientificNotationInput();
             this.MasaInicialInput = new Cefeidas.scientificNotationInput();
-            this.chartPresion = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chartVelocidad = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartRadio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartPresion)).BeginInit();
@@ -144,11 +141,11 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Controls.Add(this.chartRadio);
             this.flowLayoutPanel1.Controls.Add(this.chartPresion);
             this.flowLayoutPanel1.Controls.Add(this.chartVelocidad);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 135);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(727, 399);
@@ -156,23 +153,67 @@
             // 
             // chartRadio
             // 
+            chartArea1.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
+            chartArea1.AxisX.Title = "Tiempo (días)";
+            chartArea1.AxisY.LabelStyle.Format = "E1";
+            chartArea1.AxisY.Title = "Radio (m)";
             chartArea1.Name = "ChartArea1";
             this.chartRadio.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartRadio.Legends.Add(legend1);
             this.chartRadio.Location = new System.Drawing.Point(3, 3);
             this.chartRadio.Name = "chartRadio";
             series1.BorderColor = System.Drawing.Color.Black;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series1.Color = System.Drawing.Color.SteelBlue;
-            series1.Legend = "Legend1";
             series1.Name = "Radio";
             series1.YValuesPerPoint = 4;
             this.chartRadio.Series.Add(series1);
-            this.chartRadio.Size = new System.Drawing.Size(724, 238);
+            this.chartRadio.Size = new System.Drawing.Size(724, 250);
             this.chartRadio.TabIndex = 0;
             this.chartRadio.Text = "Radio";
+            // 
+            // chartPresion
+            // 
+            chartArea2.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
+            chartArea2.AxisX.Title = "Tiempo (días)";
+            chartArea2.AxisY.LabelStyle.Format = "E1";
+            chartArea2.AxisY.Title = "Presión (Pa)";
+            chartArea2.Name = "ChartArea1";
+            this.chartPresion.ChartAreas.Add(chartArea2);
+            this.chartPresion.Location = new System.Drawing.Point(3, 259);
+            this.chartPresion.Name = "chartPresion";
+            series2.BorderColor = System.Drawing.Color.Black;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series2.Color = System.Drawing.Color.Maroon;
+            series2.Name = "Presión";
+            series2.YValuesPerPoint = 4;
+            this.chartPresion.Series.Add(series2);
+            this.chartPresion.Size = new System.Drawing.Size(724, 250);
+            this.chartPresion.TabIndex = 1;
+            this.chartPresion.Text = "Radio";
+            // 
+            // chartVelocidad
+            // 
+            chartArea3.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
+            chartArea3.AxisX.Title = "Tiempo (días)";
+            chartArea3.AxisY.LabelStyle.Format = "E1";
+            chartArea3.AxisY.Title = "Velocidad (m/s)";
+            chartArea3.Name = "ChartArea1";
+            this.chartVelocidad.ChartAreas.Add(chartArea3);
+            this.chartVelocidad.Location = new System.Drawing.Point(3, 515);
+            this.chartVelocidad.Name = "chartVelocidad";
+            series3.BorderColor = System.Drawing.Color.Black;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series3.Color = System.Drawing.Color.Purple;
+            series3.LegendText = "Velocidad";
+            series3.Name = "Velocidad";
+            series3.YValuesPerPoint = 4;
+            this.chartVelocidad.Series.Add(series3);
+            this.chartVelocidad.Size = new System.Drawing.Size(724, 250);
+            this.chartVelocidad.TabIndex = 2;
+            this.chartVelocidad.Text = "Radio";
             // 
             // PresionInicialInput
             // 
@@ -201,47 +242,6 @@
             this.MasaInicialInput.Name = "MasaInicialInput";
             this.MasaInicialInput.Size = new System.Drawing.Size(192, 28);
             this.MasaInicialInput.TabIndex = 1;
-            // 
-            // chartPresion
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chartPresion.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartPresion.Legends.Add(legend2);
-            this.chartPresion.Location = new System.Drawing.Point(3, 247);
-            this.chartPresion.Name = "chartPresion";
-            series2.BorderColor = System.Drawing.Color.Black;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series2.Color = System.Drawing.Color.Maroon;
-            series2.Legend = "Legend1";
-            series2.Name = "Presión";
-            series2.YValuesPerPoint = 4;
-            this.chartPresion.Series.Add(series2);
-            this.chartPresion.Size = new System.Drawing.Size(724, 238);
-            this.chartPresion.TabIndex = 1;
-            this.chartPresion.Text = "Radio";
-            // 
-            // chartVelocidad
-            // 
-            chartArea3.Name = "ChartArea1";
-            this.chartVelocidad.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartVelocidad.Legends.Add(legend3);
-            this.chartVelocidad.Location = new System.Drawing.Point(3, 491);
-            this.chartVelocidad.Name = "chartVelocidad";
-            series3.BorderColor = System.Drawing.Color.Black;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series3.Color = System.Drawing.Color.Purple;
-            series3.Legend = "Legend1";
-            series3.LegendText = "Velocidad";
-            series3.Name = "Velocidad";
-            series3.YValuesPerPoint = 4;
-            this.chartVelocidad.Series.Add(series3);
-            this.chartVelocidad.Size = new System.Drawing.Size(724, 238);
-            this.chartVelocidad.TabIndex = 2;
-            this.chartVelocidad.Text = "Radio";
             // 
             // Cefeida
             // 

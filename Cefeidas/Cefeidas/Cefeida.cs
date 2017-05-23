@@ -164,7 +164,7 @@ namespace Cefeidas
                 Radio = calcularRadio(Radio, Velocidad, DELTA_TIEMPO);
                 Presion = calcularPresion(Presion, radioInicial, Radio, CALOR_ESPECIFICO);
 
-                Tiempos[i] = Tiempo;
+                Tiempos[i] = Tiempo / 86400; // para convertirlo a días.
                 Radios[i] = Radio;
                 Presiones[i] = Presion;
                 Velocidades[i] = Velocidad;
@@ -206,6 +206,15 @@ namespace Cefeidas
             Radios = new double[NUMERO_ITERACIONES];
             Presiones = new double[NUMERO_ITERACIONES];
             Velocidades = new double[NUMERO_ITERACIONES];
+
+            // Limpiar las gráficas
+            foreach (var series in chartRadio.Series)
+                series.Points.Clear();
+            foreach (var series in chartPresion.Series)
+                series.Points.Clear();
+            foreach (var series in chartVelocidad.Series)
+                series.Points.Clear();
+
         }
 
         /// <summary>
