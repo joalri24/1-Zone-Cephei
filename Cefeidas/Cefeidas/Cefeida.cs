@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Cefeidas
 {
@@ -16,10 +17,21 @@ namespace Cefeidas
         // --------------------------------------------------
         // Constantes
         // --------------------------------------------------
+
         /// <summary>
         /// Intervalo en segundos
         /// </summary>
         private const double DELTA_TIEMPO = 10000;
+
+        /// <summary>
+        /// Número de iteraciones
+        /// </summary>
+        private const double NUMERO_ITERACIONES = 150;
+
+        /// <summary>
+        /// Tasa de calor específico de un gas monoatómico ideal. 5/3.
+        /// </summary>
+        private const double CALOR_ESPECIFICO = 1.6666666666666666666666666666667;
 
 
         // --------------------------------------------------
@@ -72,6 +84,7 @@ namespace Cefeidas
 
             G = 6.674 * Math.Pow(10, -11);
 
+            // Valores por defecto --------
             MasaInicialInput.Coeficiente = 1M;
             MasaInicialInput.Exponente = 31M;
 
@@ -83,6 +96,7 @@ namespace Cefeidas
 
             PresionInicialInput.Coeficiente = 5.6M;
             PresionInicialInput.Exponente = 4M;
+            // --------------
         }
 
 
@@ -92,28 +106,96 @@ namespace Cefeidas
 
         private void button1_Click(object sender, EventArgs e)
         {
-            button1.Text = ""+PresionInicialInput.darValor();
+            SimularCefeida();
+
         }
 
-        private void ponerValoresIniciales()
+        private void SimularCefeida()
+        {
+
+            AsignarValoresIniciales();
+
+            for (int i = 0; i < NUMERO_ITERACIONES; i++)
+            {
+                double radioInicial = Radio;
+
+                Tiempo += DELTA_TIEMPO;
+                Velocidad = calcularVelocidad(Velocidad, Radio, Presion, MasaCascaron, MasaEstrella, DELTA_TIEMPO);
+                Radio = calcularRadio(Radio, Velocidad, DELTA_TIEMPO);
+                Presion = calcularPresion(Presion, radioInicial, Radio, CALOR_ESPECIFICO);
+                
+                Debug.WriteLine("V: " + Velocidad.ToString("E5"));
+                //Debug.WriteLine("R: " + Radio.ToString("E5"));
+                //Debug.WriteLine("P: " + Presion);
+                //Debug.WriteLine("---T: "+ i +" ---------------------");
+            }
+
+        }
+
+        /// <summary>
+        /// Se utiliza cuando comienza la simulación.
+        /// Asigna los valores de la interfaz a loas variables correspondientes
+        /// </summary>
+        private void AsignarValoresIniciales()
         {
             MasaEstrella = MasaInicialInput.darValor();
             MasaCascaron = MasaCascaronInput.darValor();
             Presion = PresionInicialInput.darValor();
             Radio = RadioInicialInput.darValor();
             Tiempo = 0;
+            Velocidad = 0;
         }
 
+        /// <summary>
+        /// Calcula la velocidad actual del cascarón. 
+        /// Ecuación 14.24
+        /// </summary>
+        /// <param name="velocidadInicial"></param>
+        /// <param name="radioInicial"></param>
+        /// <param name="presionInicial"></param>
+        /// <param name="masaCascaron"></param>
+        /// <param name="masaEstrella"></param>
+        /// <param name="deltaTiempo"></param>
+        /// <returns></returns>
         private double calcularVelocidad(double velocidadInicial, double radioInicial, double presionInicial, 
             double masaCascaron, double masaEstrella, double deltaTiempo)
         {
 
-            double respuesta = Velocidad;
+            double respuesta = velocidadInicial;
             double rCuadrado = Math.Pow(radioInicial, 2);
 
             respuesta += (((4 * Math.PI * presionInicial * rCuadrado) / masaCascaron) 
                 - ((G * masaEstrella) / rCuadrado)) * deltaTiempo;
               
+            return respuesta;
+        }
+
+        /// <summary>
+        /// Calcula el radio actual de la estrella. Ecuación 14.25
+        /// </summary>
+        /// <param name="radioInicial"></param>
+        /// <param name="velocidad"></param>
+        /// <param name="deltaTiempo"></param>
+        /// <returns></returns>
+        private double calcularRadio(double radioInicial, double velocidad, double deltaTiempo)
+        {
+            double respuesta = radioInicial;
+            respuesta += velocidad * deltaTiempo; 
+            return respuesta;
+        }
+
+        /// <summary>
+        /// Calcula la presión actual. Ecuación 14.23
+        /// </summary>
+        /// <param name="presionInicial"></param>
+        /// <param name="radioInicial"></param>
+        /// <param name="radioFinal"></param>
+        /// <param name="calorEspecifco"></param>
+        /// <returns></returns>
+        private double calcularPresion(double presionInicial, double radioInicial, double radioFinal, double calorEspecifco)
+        {
+            double respuesta = presionInicial;
+            respuesta *= Math.Pow( radioInicial / radioFinal, 3 * calorEspecifco);
             return respuesta;
         }
     }
