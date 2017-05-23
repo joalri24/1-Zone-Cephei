@@ -34,6 +34,7 @@
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cefeida));
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -153,7 +154,7 @@
             this.flowLayoutPanel1.Controls.Add(this.chartVelocidad);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(104, 135);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(749, 438);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(749, 404);
             this.flowLayoutPanel1.TabIndex = 13;
             // 
             // chartRadio
@@ -295,7 +296,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(899, 619);
+            this.ClientSize = new System.Drawing.Size(899, 653);
             this.Controls.Add(this.numericUpDownIteraciones);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.DetlaTiempoInput);
@@ -314,8 +315,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MasaInicialInput);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Cefeida";
-            this.Text = "Form1";
+            this.Text = "Cefeida de una Zona";
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartRadio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartPresion)).EndInit();
