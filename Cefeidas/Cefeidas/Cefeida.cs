@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Cefeidas
 {
@@ -26,12 +27,27 @@ namespace Cefeidas
         /// <summary>
         /// Número de iteraciones
         /// </summary>
-        private const double NUMERO_ITERACIONES = 150;
+        private const int NUMERO_ITERACIONES = 150;
 
         /// <summary>
         /// Tasa de calor específico de un gas monoatómico ideal. 5/3.
         /// </summary>
         private const double CALOR_ESPECIFICO = 1.6666666666666666666666666666667;
+
+        /// <summary>
+        /// El nombre de la serie de la gráfica del radio vs tiempo.
+        /// </summary>
+        private const string NOMBRE_SERIE_RADIO = "Radio";
+
+        /// <summary>
+        /// El nombre de la serie de la gráfica de la presión vs tiempo.
+        /// </summary>
+        private const string NOMBRE_SERIE_PRESION = "Presión";
+
+        /// <summary>
+        /// El nombre de la serie de la gráfica de la velocidad vs tiempo.
+        /// </summary>
+        private const string NOMBRE_SERIE_VELOCIDAD = "Velocidad";
 
 
         // --------------------------------------------------
@@ -42,6 +58,26 @@ namespace Cefeidas
         /// Constante de gravitación universal
         /// </summary>
         private double G;
+
+        /// <summary>
+        /// Arreglo donde se van a guardar los resultados de los radios.
+        /// </summary>
+        public double[] Radios { get; set; }
+
+        /// <summary>
+        /// Arreglo donde se van a guardar los resultados de las presiones.
+        /// </summary>
+        public double[] Presiones { get; set; }
+
+        /// <summary>
+        /// Arreglo donde se van a guardar los resultados de las velocidades.
+        /// </summary>
+        public double[] Velocidades { get; set; }
+
+        /// <summary>
+        /// Arreglo donde se van a guardar los valores del tiempo.
+        /// </summary>
+        public double[] Tiempos { get; set; }
 
         /// <summary>
         /// Tiempo en segundos.
@@ -72,6 +108,7 @@ namespace Cefeidas
         /// Presión en Pa.
         /// </summary>
         private double Presion { get; set; }
+
 
 
         // --------------------------------------------------
@@ -107,9 +144,12 @@ namespace Cefeidas
         private void button1_Click(object sender, EventArgs e)
         {
             SimularCefeida();
-
         }
 
+        /// <summary>
+        /// Realiza la simulación de la cefeida. 
+        /// Dentro de este método se llevan a cabo las iteraciones.
+        /// </summary>
         private void SimularCefeida()
         {
 
@@ -123,13 +163,31 @@ namespace Cefeidas
                 Velocidad = calcularVelocidad(Velocidad, Radio, Presion, MasaCascaron, MasaEstrella, DELTA_TIEMPO);
                 Radio = calcularRadio(Radio, Velocidad, DELTA_TIEMPO);
                 Presion = calcularPresion(Presion, radioInicial, Radio, CALOR_ESPECIFICO);
-                
+
+                Tiempos[i] = Tiempo;
+                Radios[i] = Radio;
+                Presiones[i] = Presion;
+                Velocidades[i] = Velocidad;
                 Debug.WriteLine("V: " + Velocidad.ToString("E5"));
                 //Debug.WriteLine("R: " + Radio.ToString("E5"));
                 //Debug.WriteLine("P: " + Presion);
                 //Debug.WriteLine("---T: "+ i +" ---------------------");
             }
 
+            graficarResultados(chartRadio, NOMBRE_SERIE_RADIO, Tiempos, Radios);
+            graficarResultados(chartPresion, NOMBRE_SERIE_PRESION, Tiempos, Presiones);
+            graficarResultados(chartVelocidad, NOMBRE_SERIE_VELOCIDAD, Tiempos, Velocidades);
+
+        }
+
+        /// <summary>
+        /// Grafica los resultados en la gráfica correspondiente.
+        /// Ambos arreglos deben tener el mismo número de elementos.
+        /// </summary>
+        private void graficarResultados(Chart grafico, string nombreSerie,  double[] datosEjeX, double[] datosEjeY)
+        {
+            for (int i = 0; i < datosEjeX.Length; i++)
+                grafico.Series[nombreSerie].Points.AddXY(datosEjeX[i], datosEjeY[i]);      
         }
 
         /// <summary>
@@ -144,6 +202,10 @@ namespace Cefeidas
             Radio = RadioInicialInput.darValor();
             Tiempo = 0;
             Velocidad = 0;
+            Tiempos = new double[NUMERO_ITERACIONES];
+            Radios = new double[NUMERO_ITERACIONES];
+            Presiones = new double[NUMERO_ITERACIONES];
+            Velocidades = new double[NUMERO_ITERACIONES];
         }
 
         /// <summary>
