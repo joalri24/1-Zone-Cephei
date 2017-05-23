@@ -20,16 +20,6 @@ namespace Cefeidas
         // --------------------------------------------------
 
         /// <summary>
-        /// Intervalo en segundos
-        /// </summary>
-        private const double DELTA_TIEMPO = 10000;
-
-        /// <summary>
-        /// Número de iteraciones
-        /// </summary>
-        private const int NUMERO_ITERACIONES = 150;
-
-        /// <summary>
         /// Tasa de calor específico de un gas monoatómico ideal. 5/3.
         /// </summary>
         private const double CALOR_ESPECIFICO = 1.6666666666666666666666666666667;
@@ -109,6 +99,21 @@ namespace Cefeidas
         /// </summary>
         private double Presion { get; set; }
 
+        /// <summary>
+        /// El intervalo de tiempo que transcurre en cada iteración.
+        /// </summary>
+        private double DeltaTiempo { get; set; }
+
+        /// <summary>
+        /// El número de iteraciones que se van a realizar.
+        /// </summary>
+        private int NumeroIteraciones { get; set; }
+
+        /// <summary>
+        /// Factor para pasar de segundos a días.
+        /// </summary>
+        private double factorDias;
+
 
 
         // --------------------------------------------------
@@ -120,6 +125,7 @@ namespace Cefeidas
             InitializeComponent();
 
             G = 6.674 * Math.Pow(10, -11);
+            factorDias = 1.0 / 86400.0;
 
             // Valores por defecto --------
             MasaInicialInput.Coeficiente = 1M;
@@ -133,6 +139,9 @@ namespace Cefeidas
 
             PresionInicialInput.Coeficiente = 5.6M;
             PresionInicialInput.Exponente = 4M;
+
+            DetlaTiempoInput.Coeficiente = 1M;
+            DetlaTiempoInput.Exponente = 4M;
             // --------------
         }
 
@@ -155,20 +164,20 @@ namespace Cefeidas
 
             AsignarValoresIniciales();
 
-            for (int i = 0; i < NUMERO_ITERACIONES; i++)
+            for (int i = 0; i < NumeroIteraciones; i++)
             {
                 double radioInicial = Radio;
 
-                Tiempo += DELTA_TIEMPO;
-                Velocidad = calcularVelocidad(Velocidad, Radio, Presion, MasaCascaron, MasaEstrella, DELTA_TIEMPO);
-                Radio = calcularRadio(Radio, Velocidad, DELTA_TIEMPO);
+                Tiempo += DeltaTiempo;
+                Velocidad = calcularVelocidad(Velocidad, Radio, Presion, MasaCascaron, MasaEstrella, DeltaTiempo);
+                Radio = calcularRadio(Radio, Velocidad, DeltaTiempo);
                 Presion = calcularPresion(Presion, radioInicial, Radio, CALOR_ESPECIFICO);
 
-                Tiempos[i] = Tiempo / 86400; // para convertirlo a días.
+                Tiempos[i] = Tiempo * factorDias; // para convertirlo a días.
                 Radios[i] = Radio;
                 Presiones[i] = Presion;
                 Velocidades[i] = Velocidad;
-                Debug.WriteLine("V: " + Velocidad.ToString("E5"));
+                Debug.WriteLine("Fc: " + factorDias);
                 //Debug.WriteLine("R: " + Radio.ToString("E5"));
                 //Debug.WriteLine("P: " + Presion);
                 //Debug.WriteLine("---T: "+ i +" ---------------------");
@@ -200,12 +209,14 @@ namespace Cefeidas
             MasaCascaron = MasaCascaronInput.darValor();
             Presion = PresionInicialInput.darValor();
             Radio = RadioInicialInput.darValor();
+            DeltaTiempo = DetlaTiempoInput.darValor();
             Tiempo = 0;
             Velocidad = 0;
-            Tiempos = new double[NUMERO_ITERACIONES];
-            Radios = new double[NUMERO_ITERACIONES];
-            Presiones = new double[NUMERO_ITERACIONES];
-            Velocidades = new double[NUMERO_ITERACIONES];
+            NumeroIteraciones = (int) numericUpDownIteraciones.Value;
+            Tiempos = new double[NumeroIteraciones];
+            Radios = new double[NumeroIteraciones];
+            Presiones = new double[NumeroIteraciones];
+            Velocidades = new double[NumeroIteraciones];
 
             // Limpiar las gráficas
             foreach (var series in chartRadio.Series)

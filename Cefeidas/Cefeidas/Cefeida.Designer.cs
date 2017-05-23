@@ -47,6 +47,10 @@
             this.chartRadio = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartPresion = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartVelocidad = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.numericUpDownIteraciones = new System.Windows.Forms.NumericUpDown();
+            this.DetlaTiempoInput = new Cefeidas.scientificNotationInput();
             this.PresionInicialInput = new Cefeidas.scientificNotationInput();
             this.RadioInicialInput = new Cefeidas.scientificNotationInput();
             this.MasaCascaronInput = new Cefeidas.scientificNotationInput();
@@ -55,6 +59,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartRadio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartPresion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartVelocidad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIteraciones)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -88,7 +93,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(685, 18);
+            this.label3.Location = new System.Drawing.Point(621, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(19, 13);
             this.label3.TabIndex = 6;
@@ -97,7 +102,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(399, 18);
+            this.label4.Location = new System.Drawing.Point(335, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 13);
             this.label4.TabIndex = 5;
@@ -124,7 +129,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(685, 51);
+            this.label7.Location = new System.Drawing.Point(621, 51);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(20, 13);
             this.label7.TabIndex = 12;
@@ -133,7 +138,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(399, 51);
+            this.label8.Location = new System.Drawing.Point(335, 51);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(74, 13);
             this.label8.TabIndex = 11;
@@ -146,9 +151,9 @@
             this.flowLayoutPanel1.Controls.Add(this.chartRadio);
             this.flowLayoutPanel1.Controls.Add(this.chartPresion);
             this.flowLayoutPanel1.Controls.Add(this.chartVelocidad);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 135);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(104, 135);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(727, 399);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(749, 438);
             this.flowLayoutPanel1.TabIndex = 13;
             // 
             // chartRadio
@@ -215,9 +220,51 @@
             this.chartVelocidad.TabIndex = 2;
             this.chartVelocidad.Text = "Radio";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(667, 18);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(51, 13);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "Intervalo:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(667, 51);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 13);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "Iteraciones: ";
+            // 
+            // numericUpDownIteraciones
+            // 
+            this.numericUpDownIteraciones.Location = new System.Drawing.Point(738, 49);
+            this.numericUpDownIteraciones.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.numericUpDownIteraciones.Name = "numericUpDownIteraciones";
+            this.numericUpDownIteraciones.Size = new System.Drawing.Size(45, 20);
+            this.numericUpDownIteraciones.TabIndex = 17;
+            this.numericUpDownIteraciones.Value = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            // 
+            // DetlaTiempoInput
+            // 
+            this.DetlaTiempoInput.Location = new System.Drawing.Point(724, 12);
+            this.DetlaTiempoInput.Name = "DetlaTiempoInput";
+            this.DetlaTiempoInput.Size = new System.Drawing.Size(192, 26);
+            this.DetlaTiempoInput.TabIndex = 15;
+            // 
             // PresionInicialInput
             // 
-            this.PresionInicialInput.Location = new System.Drawing.Point(500, 45);
+            this.PresionInicialInput.Location = new System.Drawing.Point(436, 45);
             this.PresionInicialInput.Name = "PresionInicialInput";
             this.PresionInicialInput.Size = new System.Drawing.Size(192, 28);
             this.PresionInicialInput.TabIndex = 10;
@@ -231,7 +278,7 @@
             // 
             // MasaCascaronInput
             // 
-            this.MasaCascaronInput.Location = new System.Drawing.Point(500, 12);
+            this.MasaCascaronInput.Location = new System.Drawing.Point(436, 12);
             this.MasaCascaronInput.Name = "MasaCascaronInput";
             this.MasaCascaronInput.Size = new System.Drawing.Size(192, 28);
             this.MasaCascaronInput.TabIndex = 4;
@@ -247,7 +294,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(727, 534);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(899, 619);
+            this.Controls.Add(this.numericUpDownIteraciones);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.DetlaTiempoInput);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
@@ -268,6 +320,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartRadio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartPresion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartVelocidad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIteraciones)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,6 +345,10 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chartRadio;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartPresion;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartVelocidad;
+        private System.Windows.Forms.Label label9;
+        private scientificNotationInput DetlaTiempoInput;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown numericUpDownIteraciones;
     }
 }
 
