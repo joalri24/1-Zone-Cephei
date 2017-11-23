@@ -154,7 +154,7 @@
             this.flowLayoutPanel1.Controls.Add(this.chartVelocidad);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(113, 135);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(749, 370);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(749, 353);
             this.flowLayoutPanel1.TabIndex = 13;
             // 
             // chartRadio
