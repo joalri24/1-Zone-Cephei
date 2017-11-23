@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace Cefeidas
 {
+    /// <summary>
+    /// <Author> Jose Riaño - 2017 </Author>
+    /// </summary>
     public partial class scientificNotationInput : UserControl
     {
         // -----------------------------------------------------
@@ -26,7 +29,7 @@ namespace Cefeidas
         // Métodos
         // -----------------------------------------------------
 
-        public decimal Exponente
+        public decimal Exponent
         {
             set
             {
@@ -34,7 +37,7 @@ namespace Cefeidas
             }
         }
 
-        public decimal Coeficiente
+        public decimal Coefficient
         {
             set
             {
@@ -42,11 +45,11 @@ namespace Cefeidas
             }
         }
 
-        public double darValor()
+        public double getValue()
         {
-            double exponente = Convert.ToDouble(numericUpDownExp.Value);
-            double coeficiente = Convert.ToDouble(numericUpDownCoeficiente.Value);
-            return coeficiente * Math.Pow(10, exponente);
+            double exponent = Convert.ToDouble(numericUpDownExp.Value);
+            double coefficient = Convert.ToDouble(numericUpDownCoeficiente.Value);
+            return coefficient * Math.Pow(10, exponent);
         }
 
     }

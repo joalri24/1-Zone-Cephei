@@ -12,213 +12,208 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Cefeidas
 {
-    public partial class Cefeida : Form
+    /// <Author> Jose Riaño - 2017 </Author>
+    public partial class Cepheid : Form
     {
 
         // --------------------------------------------------
-        // Constantes
+        // Constants
         // --------------------------------------------------
 
         /// <summary>
-        /// Tasa de calor específico de un gas monoatómico ideal. 5/3.
+        /// Specific heat ratio for an ideal monoatomic gas = 5/3.
         /// </summary>
-        private const double CALOR_ESPECIFICO = 1.6666666666666666666666666666667;
+        private const double SPECIFIC_HEAT_RATIO = 1.6666666666666666666666666666667;
 
         /// <summary>
-        /// El nombre de la serie de la gráfica del radio vs tiempo.
+        /// Series name displayed in the radius vs time chart.
         /// </summary>
-        private const string NOMBRE_SERIE_RADIO = "Radio";
+        private const string RADIUS_SERIES_NAME = "Radio";
 
         /// <summary>
-        /// El nombre de la serie de la gráfica de la presión vs tiempo.
+        /// Series name displayed in the pressure vs time chart.
         /// </summary>
-        private const string NOMBRE_SERIE_PRESION = "Presión";
+        private const string PRESSURE_SERIES_NAME = "Presión";
 
         /// <summary>
-        /// El nombre de la serie de la gráfica de la velocidad vs tiempo.
+        /// Series name displayed in the velocity vs time chart.
         /// </summary>
-        private const string NOMBRE_SERIE_VELOCIDAD = "Velocidad";
+        private const string VELOCITY_SERIES_NAME = "Velocidad";
 
 
         // --------------------------------------------------
-        // Atributos y propiedades
-
+        // Attributes and properties
         // --------------------------------------------------
+
         /// <summary>
-        /// Constante de gravitación universal
+        /// Universal Gravitational constant
         /// </summary>
         private double G;
 
         /// <summary>
-        /// Arreglo donde se van a guardar los resultados de los radios.
+        /// The resulting radius are stored in this array.
         /// </summary>
-        public double[] Radios { get; set; }
+        public double[] Radiuses { get; set; }
 
         /// <summary>
-        /// Arreglo donde se van a guardar los resultados de las presiones.
+        /// The resulting pressures are stored in this array.
         /// </summary>
-        public double[] Presiones { get; set; }
+        public double[] Pressures { get; set; }
 
         /// <summary>
-        /// Arreglo donde se van a guardar los resultados de las velocidades.
+        /// The resulting velocities are stored in this array.
         /// </summary>
-        public double[] Velocidades { get; set; }
+        public double[] Velocities { get; set; }
 
         /// <summary>
-        /// Arreglo donde se van a guardar los valores del tiempo.
+        /// The time stamps are stored in this array.
         /// </summary>
-        public double[] Tiempos { get; set; }
+        public double[] Times { get; set; }
 
         /// <summary>
-        /// Tiempo en segundos.
+        /// Time in seconds.
         /// </summary>
-        private double Tiempo { get; set; }
+        private double Time { get; set; }
 
         /// <summary>
-        /// Masa en kg.
+        /// Star mass in Kg.
         /// </summary>
-        private double MasaEstrella { get; set; }
+        private double StarMass { get; set; }
 
         /// <summary>
-        /// Masa en m
+        /// Star radius in Km.
         /// </summary>
-        private double Radio { get; set; }
+        private double Radius { get; set; }
 
         /// <summary>
-        /// Velocidad en m/s.
+        /// Shell velocity in m/s.
         /// </summary>
-        private double Velocidad { get; set; }
+        private double Velocity { get; set; }
 
         /// <summary>
-        /// Masa en kg.
+        /// Shell mass in Kg.
         /// </summary>
-        private double MasaCascaron { get; set; }
+        private double ShellMass { get; set; }
 
         /// <summary>
-        /// Presión en Pa.
+        /// star pressure in Pa.
         /// </summary>
-        private double Presion { get; set; }
+        private double Pressure { get; set; }
 
         /// <summary>
-        /// El intervalo de tiempo que transcurre en cada iteración.
+        /// Time trancurred between iterations.
         /// </summary>
-        private double DeltaTiempo { get; set; }
+        private double TimeDelta { get; set; }
 
         /// <summary>
-        /// El número de iteraciones que se van a realizar.
+        /// Number of iterations to be executed.
         /// </summary>
-        private int NumeroIteraciones { get; set; }
+        private int Iterations { get; set; }
 
         /// <summary>
-        /// Factor para pasar de segundos a días.
+        /// Factor to transform from seconda to days.
         /// </summary>
-        private double factorDias;
+        private double ToDayFactor;
 
 
 
         // --------------------------------------------------
-        // Constructores
+        // Constructors
         // --------------------------------------------------
 
-        public Cefeida()
+        public Cepheid()
         {
             InitializeComponent();
 
             G = 6.674 * Math.Pow(10, -11);
-            factorDias = 1.0 / 86400.0;
+            ToDayFactor = 1.0 / 86400.0;
 
-            // Valores por defecto --------
-            MasaInicialInput.Coeficiente = 1M;
-            MasaInicialInput.Exponente = 31M;
+            // Default values --------
+            InitialMassInput.Coefficient = 1M;
+            InitialMassInput.Exponent = 31M;
 
-            RadioInicialInput.Coeficiente = 1.7M;
-            RadioInicialInput.Exponente = 10M;
+            InitialRadiusInput.Coefficient = 1.7M;
+            InitialRadiusInput.Exponent = 10M;
 
-            MasaCascaronInput.Coeficiente = 1M;
-            MasaCascaronInput.Exponente = 26M;
+            ShellMassInput.Coefficient = 1M;
+            ShellMassInput.Exponent = 26M;
 
-            PresionInicialInput.Coeficiente = 5.6M;
-            PresionInicialInput.Exponente = 4M;
+            InitialPressureInput.Coefficient = 5.6M;
+            InitialPressureInput.Exponent = 4M;
 
-            DetlaTiempoInput.Coeficiente = 1M;
-            DetlaTiempoInput.Exponente = 4M;
-            // --------------
+            TimeDeltaInput.Coefficient = 1M;
+            TimeDeltaInput.Exponent = 4M;
+
         }
 
 
         // --------------------------------------------------
-        // Métodos
+        // Methods
         // --------------------------------------------------
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SimularCefeida();
+            SimulateCepheid();
         }
 
-        /// <summary>
-        /// Realiza la simulación de la cefeida. 
-        /// Dentro de este método se llevan a cabo las iteraciones.
+        /// <summary> 
+        /// Starts the simulation.
         /// </summary>
-        private void SimularCefeida()
+        private void SimulateCepheid()
         {
+            AssignInitialValues();
 
-            AsignarValoresIniciales();
-
-            for (int i = 0; i < NumeroIteraciones; i++)
+            for (int i = 0; i < Iterations; i++)
             {
-                double radioInicial = Radio;
+                double initialRadius = Radius;
 
-                Tiempo += DeltaTiempo;
-                Velocidad = calcularVelocidad(Velocidad, Radio, Presion, MasaCascaron, MasaEstrella, DeltaTiempo);
-                Radio = calcularRadio(Radio, Velocidad, DeltaTiempo);
-                Presion = calcularPresion(Presion, radioInicial, Radio, CALOR_ESPECIFICO);
+                Time += TimeDelta;
+                Velocity = calculateVelocity(Velocity, Radius, Pressure, ShellMass, StarMass, TimeDelta);
+                Radius = calculateRadius(Radius, Velocity, TimeDelta);
+                Pressure = calculatePressure(Pressure, initialRadius, Radius, SPECIFIC_HEAT_RATIO);
 
-                Tiempos[i] = Tiempo * factorDias; // para convertirlo a días.
-                Radios[i] = Radio;
-                Presiones[i] = Presion;
-                Velocidades[i] = Velocidad;
-                Debug.WriteLine("Fc: " + factorDias);
-                //Debug.WriteLine("R: " + Radio.ToString("E5"));
-                //Debug.WriteLine("P: " + Presion);
-                //Debug.WriteLine("---T: "+ i +" ---------------------");
+                Times[i] = Time * ToDayFactor; // para convertirlo a días.
+                Radiuses[i] = Radius;
+                Pressures[i] = Pressure;
+                Velocities[i] = Velocity;
+                Debug.WriteLine("Fc: " + ToDayFactor);
             }
 
-            graficarResultados(chartRadio, NOMBRE_SERIE_RADIO, Tiempos, Radios);
-            graficarResultados(chartPresion, NOMBRE_SERIE_PRESION, Tiempos, Presiones);
-            graficarResultados(chartVelocidad, NOMBRE_SERIE_VELOCIDAD, Tiempos, Velocidades);
+            PlotResults(chartRadio, RADIUS_SERIES_NAME, Times, Radiuses);
+            PlotResults(chartPresion, PRESSURE_SERIES_NAME, Times, Pressures);
+            PlotResults(chartVelocidad, VELOCITY_SERIES_NAME, Times, Velocities);
 
         }
 
         /// <summary>
-        /// Grafica los resultados en la gráfica correspondiente.
-        /// Ambos arreglos deben tener el mismo número de elementos.
+        /// Plots results in the given chart.
+        /// Both parameters must have the same size.
         /// </summary>
-        private void graficarResultados(Chart grafico, string nombreSerie,  double[] datosEjeX, double[] datosEjeY)
+        private void PlotResults(Chart chart, string seriesName,  double[] xAxisData, double[] yAxisData)
         {
-            for (int i = 0; i < datosEjeX.Length; i++)
-                grafico.Series[nombreSerie].Points.AddXY(datosEjeX[i], datosEjeY[i]);      
+            for (int i = 0; i < xAxisData.Length; i++)
+                chart.Series[seriesName].Points.AddXY(xAxisData[i], yAxisData[i]);      
         }
 
         /// <summary>
-        /// Se utiliza cuando comienza la simulación.
-        /// Asigna los valores de la interfaz a loas variables correspondientes
+        /// Gets the values from the UI, and initializes the necessary variables.
         /// </summary>
-        private void AsignarValoresIniciales()
+        private void AssignInitialValues()
         {
-            MasaEstrella = MasaInicialInput.darValor();
-            MasaCascaron = MasaCascaronInput.darValor();
-            Presion = PresionInicialInput.darValor();
-            Radio = RadioInicialInput.darValor();
-            DeltaTiempo = DetlaTiempoInput.darValor();
-            Tiempo = 0;
-            Velocidad = 0;
-            NumeroIteraciones = (int) numericUpDownIteraciones.Value;
-            Tiempos = new double[NumeroIteraciones];
-            Radios = new double[NumeroIteraciones];
-            Presiones = new double[NumeroIteraciones];
-            Velocidades = new double[NumeroIteraciones];
+            StarMass = InitialMassInput.getValue();
+            ShellMass = ShellMassInput.getValue();
+            Pressure = InitialPressureInput.getValue();
+            Radius = InitialRadiusInput.getValue();
+            TimeDelta = TimeDeltaInput.getValue();
+            Time = 0;
+            Velocity = 0;
+            Iterations = (int) numericUpDownIterations.Value;
+            Times = new double[Iterations];
+            Radiuses = new double[Iterations];
+            Pressures = new double[Iterations];
+            Velocities = new double[Iterations];
 
-            // Limpiar las gráficas
+            // Clear charts.
             foreach (var series in chartRadio.Series)
                 series.Points.Clear();
             foreach (var series in chartPresion.Series)
@@ -229,56 +224,58 @@ namespace Cefeidas
         }
 
         /// <summary>
-        /// Calcula la velocidad actual del cascarón. 
-        /// Ecuación 14.24
+        /// Calculates the shell's current speed. 
+        /// Equation 14.24
         /// </summary>
-        /// <param name="velocidadInicial"></param>
-        /// <param name="radioInicial"></param>
-        /// <param name="presionInicial"></param>
-        /// <param name="masaCascaron"></param>
-        /// <param name="masaEstrella"></param>
-        /// <param name="deltaTiempo"></param>
+        /// <param name="initialVelocity"></param>
+        /// <param name="initialRadius"></param>
+        /// <param name="initialPressure"></param>
+        /// <param name="shellMass"></param>
+        /// <param name="starMass"></param>
+        /// <param name="timeDelta"></param>
         /// <returns></returns>
-        private double calcularVelocidad(double velocidadInicial, double radioInicial, double presionInicial, 
-            double masaCascaron, double masaEstrella, double deltaTiempo)
+        private double calculateVelocity(double initialVelocity, double initialRadius, double initialPressure, 
+            double shellMass, double starMass, double timeDelta)
         {
 
-            double respuesta = velocidadInicial;
-            double rCuadrado = Math.Pow(radioInicial, 2);
+            double answer = initialVelocity;
+            double rSquared = Math.Pow(initialRadius, 2);
 
-            respuesta += (((4 * Math.PI * presionInicial * rCuadrado) / masaCascaron) 
-                - ((G * masaEstrella) / rCuadrado)) * deltaTiempo;
+            answer += (((4 * Math.PI * initialPressure * rSquared) / shellMass) 
+                - ((G * starMass) / rSquared)) * timeDelta;
               
-            return respuesta;
+            return answer;
         }
 
         /// <summary>
-        /// Calcula el radio actual de la estrella. Ecuación 14.25
+        /// Calculates the star's current radius.
+        /// Equation 14.25
         /// </summary>
-        /// <param name="radioInicial"></param>
-        /// <param name="velocidad"></param>
-        /// <param name="deltaTiempo"></param>
+        /// <param name="initialRadius"></param>
+        /// <param name="velocity"></param>
+        /// <param name="timeDelta"></param>
         /// <returns></returns>
-        private double calcularRadio(double radioInicial, double velocidad, double deltaTiempo)
+        private double calculateRadius(double initialRadius, double velocity, double timeDelta)
         {
-            double respuesta = radioInicial;
-            respuesta += velocidad * deltaTiempo; 
-            return respuesta;
+            double answer = initialRadius;
+            answer += velocity * timeDelta; 
+            return answer;
         }
 
         /// <summary>
-        /// Calcula la presión actual. Ecuación 14.23
+        /// Calculates the star's current pressure.
+        /// Equation 14.23
         /// </summary>
-        /// <param name="presionInicial"></param>
-        /// <param name="radioInicial"></param>
-        /// <param name="radioFinal"></param>
-        /// <param name="calorEspecifco"></param>
+        /// <param name="initialPressure"></param>
+        /// <param name="initialRadius"></param>
+        /// <param name="finalRadius"></param>
+        /// <param name="specificHeat"></param>
         /// <returns></returns>
-        private double calcularPresion(double presionInicial, double radioInicial, double radioFinal, double calorEspecifco)
+        private double calculatePressure(double initialPressure, double initialRadius, double finalRadius, double specificHeat)
         {
-            double respuesta = presionInicial;
-            respuesta *= Math.Pow( radioInicial / radioFinal, 3 * calorEspecifco);
-            return respuesta;
+            double answer = initialPressure;
+            answer *= Math.Pow( initialRadius / finalRadius, 3 * specificHeat);
+            return answer;
         }
     }
 }

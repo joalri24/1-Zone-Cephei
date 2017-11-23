@@ -16,7 +16,7 @@ namespace Cefeidas
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Cefeida());
+            Application.Run(new Cepheid());
         }
     }
 }

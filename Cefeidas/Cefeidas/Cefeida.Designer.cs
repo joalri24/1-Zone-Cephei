@@ -1,6 +1,6 @@
 ﻿namespace Cefeidas
 {
-    partial class Cefeida
+    partial class Cepheid
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,7 @@
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cefeida));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cepheid));
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,17 +50,17 @@
             this.chartVelocidad = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.numericUpDownIteraciones = new System.Windows.Forms.NumericUpDown();
-            this.DetlaTiempoInput = new Cefeidas.scientificNotationInput();
-            this.PresionInicialInput = new Cefeidas.scientificNotationInput();
-            this.RadioInicialInput = new Cefeidas.scientificNotationInput();
-            this.MasaCascaronInput = new Cefeidas.scientificNotationInput();
-            this.MasaInicialInput = new Cefeidas.scientificNotationInput();
+            this.numericUpDownIterations = new System.Windows.Forms.NumericUpDown();
+            this.TimeDeltaInput = new Cefeidas.scientificNotationInput();
+            this.InitialPressureInput = new Cefeidas.scientificNotationInput();
+            this.InitialRadiusInput = new Cefeidas.scientificNotationInput();
+            this.ShellMassInput = new Cefeidas.scientificNotationInput();
+            this.InitialMassInput = new Cefeidas.scientificNotationInput();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartRadio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartPresion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartVelocidad)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIteraciones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIterations)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -152,9 +152,9 @@
             this.flowLayoutPanel1.Controls.Add(this.chartRadio);
             this.flowLayoutPanel1.Controls.Add(this.chartPresion);
             this.flowLayoutPanel1.Controls.Add(this.chartVelocidad);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(104, 135);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(113, 135);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(749, 404);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(749, 370);
             this.flowLayoutPanel1.TabIndex = 13;
             // 
             // chartRadio
@@ -239,90 +239,90 @@
             this.label10.TabIndex = 16;
             this.label10.Text = "Iteraciones: ";
             // 
-            // numericUpDownIteraciones
+            // numericUpDownIterations
             // 
-            this.numericUpDownIteraciones.Location = new System.Drawing.Point(738, 49);
-            this.numericUpDownIteraciones.Maximum = new decimal(new int[] {
+            this.numericUpDownIterations.Location = new System.Drawing.Point(738, 49);
+            this.numericUpDownIterations.Maximum = new decimal(new int[] {
             500,
             0,
             0,
             0});
-            this.numericUpDownIteraciones.Name = "numericUpDownIteraciones";
-            this.numericUpDownIteraciones.Size = new System.Drawing.Size(45, 20);
-            this.numericUpDownIteraciones.TabIndex = 17;
-            this.numericUpDownIteraciones.Value = new decimal(new int[] {
+            this.numericUpDownIterations.Name = "numericUpDownIterations";
+            this.numericUpDownIterations.Size = new System.Drawing.Size(45, 20);
+            this.numericUpDownIterations.TabIndex = 17;
+            this.numericUpDownIterations.Value = new decimal(new int[] {
             150,
             0,
             0,
             0});
             // 
-            // DetlaTiempoInput
+            // TimeDeltaInput
             // 
-            this.DetlaTiempoInput.Location = new System.Drawing.Point(724, 12);
-            this.DetlaTiempoInput.Name = "DetlaTiempoInput";
-            this.DetlaTiempoInput.Size = new System.Drawing.Size(192, 26);
-            this.DetlaTiempoInput.TabIndex = 15;
+            this.TimeDeltaInput.Location = new System.Drawing.Point(724, 12);
+            this.TimeDeltaInput.Name = "TimeDeltaInput";
+            this.TimeDeltaInput.Size = new System.Drawing.Size(192, 26);
+            this.TimeDeltaInput.TabIndex = 15;
             // 
-            // PresionInicialInput
+            // InitialPressureInput
             // 
-            this.PresionInicialInput.Location = new System.Drawing.Point(436, 45);
-            this.PresionInicialInput.Name = "PresionInicialInput";
-            this.PresionInicialInput.Size = new System.Drawing.Size(192, 28);
-            this.PresionInicialInput.TabIndex = 10;
+            this.InitialPressureInput.Location = new System.Drawing.Point(436, 45);
+            this.InitialPressureInput.Name = "InitialPressureInput";
+            this.InitialPressureInput.Size = new System.Drawing.Size(192, 28);
+            this.InitialPressureInput.TabIndex = 10;
             // 
-            // RadioInicialInput
+            // InitialRadiusInput
             // 
-            this.RadioInicialInput.Location = new System.Drawing.Point(113, 45);
-            this.RadioInicialInput.Name = "RadioInicialInput";
-            this.RadioInicialInput.Size = new System.Drawing.Size(192, 28);
-            this.RadioInicialInput.TabIndex = 7;
+            this.InitialRadiusInput.Location = new System.Drawing.Point(113, 45);
+            this.InitialRadiusInput.Name = "InitialRadiusInput";
+            this.InitialRadiusInput.Size = new System.Drawing.Size(192, 28);
+            this.InitialRadiusInput.TabIndex = 7;
             // 
-            // MasaCascaronInput
+            // ShellMassInput
             // 
-            this.MasaCascaronInput.Location = new System.Drawing.Point(436, 12);
-            this.MasaCascaronInput.Name = "MasaCascaronInput";
-            this.MasaCascaronInput.Size = new System.Drawing.Size(192, 28);
-            this.MasaCascaronInput.TabIndex = 4;
+            this.ShellMassInput.Location = new System.Drawing.Point(436, 12);
+            this.ShellMassInput.Name = "ShellMassInput";
+            this.ShellMassInput.Size = new System.Drawing.Size(192, 28);
+            this.ShellMassInput.TabIndex = 4;
             // 
-            // MasaInicialInput
+            // InitialMassInput
             // 
-            this.MasaInicialInput.Location = new System.Drawing.Point(113, 12);
-            this.MasaInicialInput.Name = "MasaInicialInput";
-            this.MasaInicialInput.Size = new System.Drawing.Size(192, 28);
-            this.MasaInicialInput.TabIndex = 1;
+            this.InitialMassInput.Location = new System.Drawing.Point(113, 12);
+            this.InitialMassInput.Name = "InitialMassInput";
+            this.InitialMassInput.Size = new System.Drawing.Size(192, 28);
+            this.InitialMassInput.TabIndex = 1;
             // 
-            // Cefeida
+            // Cepheid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(899, 653);
-            this.Controls.Add(this.numericUpDownIteraciones);
+            this.Controls.Add(this.numericUpDownIterations);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.DetlaTiempoInput);
+            this.Controls.Add(this.TimeDeltaInput);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.PresionInicialInput);
+            this.Controls.Add(this.InitialPressureInput);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.RadioInicialInput);
+            this.Controls.Add(this.InitialRadiusInput);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.MasaCascaronInput);
+            this.Controls.Add(this.ShellMassInput);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.MasaInicialInput);
+            this.Controls.Add(this.InitialMassInput);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Cefeida";
+            this.Name = "Cepheid";
             this.Text = "Cefeida de una Zona";
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartRadio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartPresion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartVelocidad)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIteraciones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIterations)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -331,26 +331,26 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private scientificNotationInput MasaInicialInput;
+        private scientificNotationInput InitialMassInput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private scientificNotationInput MasaCascaronInput;
+        private scientificNotationInput ShellMassInput;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private scientificNotationInput RadioInicialInput;
+        private scientificNotationInput InitialRadiusInput;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private scientificNotationInput PresionInicialInput;
+        private scientificNotationInput InitialPressureInput;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartRadio;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartPresion;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartVelocidad;
         private System.Windows.Forms.Label label9;
-        private scientificNotationInput DetlaTiempoInput;
+        private scientificNotationInput TimeDeltaInput;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown numericUpDownIteraciones;
+        private System.Windows.Forms.NumericUpDown numericUpDownIterations;
     }
 }
 
